@@ -1,0 +1,83 @@
+{
+    "info": {
+      "name": "Cloud Smart OTP",
+      "description": "Secure Authentication APIs — Session, OTP Request, Verify, Transaction Validate",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Start Session",
+        "request": {
+          "method": "POST",
+          "header": [
+            { "key": "Content-Type", "value": "application/json" }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"userId\": \"user_12345\",\n  \"deviceInfo\": {\n    \"ip\": \"192.168.1.1\",\n    \"deviceId\": \"abcdef123456\",\n    \"browser\": \"Chrome\",\n    \"os\": \"iOS\"\n  }\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/api/session/start",
+            "host": ["{{baseUrl}}"],
+            "path": ["api", "session", "start"]
+          }
+        }
+      },
+      {
+        "name": "Request OTP",
+        "request": {
+          "method": "POST",
+          "header": [
+            { "key": "Content-Type", "value": "application/json" }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"channel\": \"push\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/api/otp/request",
+            "host": ["{{baseUrl}}"],
+            "path": ["api", "otp", "request"]
+          }
+        }
+      },
+      {
+        "name": "Verify OTP",
+        "request": {
+          "method": "POST",
+          "header": [
+            { "key": "Content-Type", "value": "application/json" }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"otpCode\": \"123456\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/api/otp/verify",
+            "host": ["{{baseUrl}}"],
+            "path": ["api", "otp", "verify"]
+          }
+        }
+      },
+      {
+        "name": "Transaction Validate",
+        "request": {
+          "method": "POST",
+          "header": [
+            { "key": "Content-Type", "value": "application/json" }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"transactionId\": \"txn_789\",\n  \"otpCode\": \"123456\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/api/transaction/validate",
+            "host": ["{{baseUrl}}"],
+            "path": ["api", "transaction", "validate"]
+          }
+        }
+      }
+    ],
+    "event": []
+  }
+  
