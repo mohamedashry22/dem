@@ -1,83 +1,81 @@
 {
-    "info": {
-      "name": "Cloud Smart OTP",
-      "description": "Secure Authentication APIs — Session, OTP Request, Verify, Transaction Validate",
-      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
-      {
-        "name": "Start Session",
-        "request": {
-          "method": "POST",
-          "header": [
-            { "key": "Content-Type", "value": "application/json" }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"userId\": \"user_12345\",\n  \"deviceInfo\": {\n    \"ip\": \"192.168.1.1\",\n    \"deviceId\": \"abcdef123456\",\n    \"browser\": \"Chrome\",\n    \"os\": \"iOS\"\n  }\n}"
-          },
-          "url": {
-            "raw": "{{baseUrl}}/api/session/start",
-            "host": ["{{baseUrl}}"],
-            "path": ["api", "session", "start"]
+  "info": {
+    "name": "OTP Service API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "12345678-1234-1234-1234-1234567890ab"
+  },
+  "item": [
+    {
+      "name": "Request OTP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
           }
-        }
-      },
-      {
-        "name": "Request OTP",
-        "request": {
-          "method": "POST",
-          "header": [
-            { "key": "Content-Type", "value": "application/json" }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"channel\": \"push\"\n}"
-          },
-          "url": {
-            "raw": "{{baseUrl}}/api/otp/request",
-            "host": ["{{baseUrl}}"],
-            "path": ["api", "otp", "request"]
-          }
-        }
-      },
-      {
-        "name": "Verify OTP",
-        "request": {
-          "method": "POST",
-          "header": [
-            { "key": "Content-Type", "value": "application/json" }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"otpCode\": \"123456\"\n}"
-          },
-          "url": {
-            "raw": "{{baseUrl}}/api/otp/verify",
-            "host": ["{{baseUrl}}"],
-            "path": ["api", "otp", "verify"]
-          }
-        }
-      },
-      {
-        "name": "Transaction Validate",
-        "request": {
-          "method": "POST",
-          "header": [
-            { "key": "Content-Type", "value": "application/json" }
-          ],
-          "body": {
-            "mode": "raw",
-            "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"transactionId\": \"txn_789\",\n  \"otpCode\": \"123456\"\n}"
-          },
-          "url": {
-            "raw": "{{baseUrl}}/api/transaction/validate",
-            "host": ["{{baseUrl}}"],
-            "path": ["api", "transaction", "validate"]
-          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/request-otp",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "request-otp"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"emailOrPhone\": \"user@example.com\",\n  \"deviceId\": \"abcdef123456\"\n}"
         }
       }
-    ],
-    "event": []
-  }
-  
+    },
+    {
+      "name": "Verify OTP",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/api/verify-otp",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "verify-otp"]
+        },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sessionId\": \"your-session-id\",\n  \"otp\": \"123456\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get Logs",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/api/logs",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "logs"]
+        }
+      }
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/api/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["api", "health"]
+        }
+      }
+    }
+  ]
+}

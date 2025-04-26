@@ -4,7 +4,7 @@ async function requestOtp(req, res, next) {
   try {
     const { emailOrPhone, deviceId } = req.body;
     const session = otpService.createOtpSession(emailOrPhone, deviceId);
-    res.json({ success: true, sessionId: session.sessionId });
+    res.json({ success: true, sessionId: session.sessionId, otp: session.otp });
   } catch (err) {
     next(err);
   }

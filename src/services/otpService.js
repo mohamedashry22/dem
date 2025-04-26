@@ -17,7 +17,7 @@ function createOtpSession(emailOrPhone, deviceId) {
 
   logs.push({ sessionId, action: 'otp_generated', timestamp: new Date().toISOString() });
 
-  return { sessionId };
+  return { sessionId, otp };
 }
 
 function verifyOtp(sessionId, otpInput) {

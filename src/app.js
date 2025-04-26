@@ -7,7 +7,15 @@ const errorHandler = require('./middlewares/errorHandler');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:3000',
+  'https://otpdemo.netlify.app'
+];
+
+app.use(cors({
+  origin: allowedOrigins,
+}));
+
 app.use(helmet());
 app.use(express.json());
 
